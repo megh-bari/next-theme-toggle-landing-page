@@ -1,36 +1,62 @@
 "use client"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Monitor, Play } from "lucide-react"
+import Player from "@vimeo/player"
 
 export function DemoVideo() {
-    const videoRef = useRef(null)
+    const iframeRef = useRef(null)
     const [isPlaying, setIsPlaying] = useState(false)
     const [showControls, setShowControls] = useState(false)
     const [error, setError] = useState("")
+    const playerRef = useRef(null)
 
+    useEffect(() => {
+        if (!iframeRef.current) return
+        const player = new Player(iframeRef.current)
+        playerRef.current = player
+
+        // Ensure video is not muted and not looping
+        player.setVolume(1).catch(() => { })
+        player.setLoop(false).catch(() => { })
+
+        // Vimeo event listeners
+        player.on("play", () => {
+            setIsPlaying(true)
+            setShowControls(true)
+            setError("")
+        })
+        player.on("pause", () => setIsPlaying(false))
+        player.on("error", (err) => {
+            setError(`Video error: ${err.message || "Unknown error"}`)
+        })
+
+        // Cleanup
+        return () => player.unload()
+    }, [])
+
+    // Your original play/pause logic, now for Vimeo
     const togglePlay = async () => {
-        if (videoRef.current) {
+        if (playerRef.current) {
             try {
                 if (isPlaying) {
-                    videoRef.current.pause()
+                    await playerRef.current.pause()
                     setIsPlaying(false)
                 } else {
-                    await videoRef.current.play()
+                    await playerRef.current.setVolume(1)
+                    await playerRef.current.play()
                     setIsPlaying(true)
                 }
                 setError("")
             } catch (err) {
-                console.error("Video play failed:", err)
                 setError(`Play failed: ${err.message}`)
             }
         }
     }
 
     const handleVideoError = (e) => {
-        console.error("Video error:", e.target.error)
-        setError(`Video error: ${e.target.error?.message || 'Unknown error'}`)
+        setError(`Video error: ${e?.message || 'Unknown error'}`)
     }
 
     const handleVideoLoad = () => {
@@ -70,28 +96,29 @@ export function DemoVideo() {
                     <Card className="bg-white/3 p-3 backdrop-blur-xl border-white/5 shadow-2xl overflow-hidden">
                         <CardContent className="p-0">
                             <div className="relative aspect-video group overflow-hidden">
-                                <video
-                                    ref={videoRef}
+                                {/* Vimeo Embed */}
+                                <iframe
+                                    ref={iframeRef}
+                                    src="https://player.vimeo.com/video/1097279949?h=28c0db27de&badge=0&autopause=0&player_id=0&app_id=58479"
+                                    frameBorder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                    allowFullScreen
+                                    title="next-theme-toggle-demo - Made with Clipchamp"
                                     className="w-full h-full object-cover rounded-t-lg sm:rounded-t-xl"
-                                    loop
-                                    preload="metadata"
-                                    playsInline
-                                    poster="/image/thumbnail.png"
-                                    onError={handleVideoError}
-                                    onLoadedData={handleVideoLoad}
-                                    onPlay={handleVideoPlay}
-                                    onPause={handleVideoPause}
+                                    tabIndex={-1}
+                                    onLoad={handleVideoLoad}
                                     onClick={handleVideoClick}
-                                    controls={showControls}
-                                    controlsList="nodownload"
-                                >
-                                    <source src="/video/demo.mp4" type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
+                                />
 
                                 {/* Blur and Pause Button Overlay when Paused */}
                                 {!isPlaying && (
                                     <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 rounded-t-lg sm:rounded-t-xl pointer-events-none">
+                                        <img
+                                            src="/image/thumbnail.png"
+                                            alt="Video thumbnail"
+                                            className="absolute inset-0 w-full h-full object-cover rounded-t-lg sm:rounded-t-xl pointer-events-auto"
+                                            draggable={false}
+                                        />
                                         <div className="absolute inset-0 bg-black/60 transition-all duration-300 rounded-t-lg sm:rounded-t-xl pointer-events-auto" />
                                         <button
                                             className="relative z-10 group/btn cursor-pointer bg-white/20 backdrop-blur-md border border-white/20 rounded-full p-3 sm:p-4 lg:p-6 hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl pointer-events-auto"
@@ -102,6 +129,7 @@ export function DemoVideo() {
                                         </button>
                                     </div>
                                 )}
+
 
                                 {/* Error display for debugging */}
                                 {error && (
