@@ -27,7 +27,7 @@ export function DemoVideo() {
             setError("")
         })
         player.on("pause", () => setIsPlaying(false))
-        player.on("error", (err: any) => {
+        player.on("error", (err: { message?: string }) => {
             setError(`Video error: ${err.message || "Unknown error"}`)
         })
 
@@ -48,8 +48,9 @@ export function DemoVideo() {
                     setIsPlaying(true)
                 }
                 setError("")
-            } catch (err: any) {
-                setError(`Play failed: ${err.message}`)
+            } catch (err: unknown) {
+                const errorMessage = err instanceof Error ? err.message : "Unknown error"
+                setError(`Play failed: ${errorMessage}`)
             }
         }
     }
