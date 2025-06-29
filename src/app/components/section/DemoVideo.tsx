@@ -140,12 +140,13 @@ export function DemoVideo() {
                                 {/* Show play button when video is paused (but has been started) */}
                                 {hasStarted && !isPlaying && (
                                     <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 rounded-t-lg sm:rounded-t-xl pointer-events-none">
+                                        
                                         <button
                                             className="relative z-10 group/btn cursor-pointer bg-white/20 backdrop-blur-md border border-white/20 rounded-full p-3 sm:p-4 lg:p-6 hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl pointer-events-auto"
                                             onClick={handleToggle}
                                             aria-label="Play video"
                                         >
-                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-white ml-0.5 sm:ml-1 group-hover/btn:scale-110 transition-transform duration-200" />
+                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-md text-white ml-0.5 sm:ml-1 group-hover/btn:scale-110 transition-transform duration-200" />
                                         </button>
                                     </div>
                                 )}

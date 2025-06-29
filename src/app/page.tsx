@@ -13,6 +13,7 @@ import { HowItWorks } from "./components/section/HowItWorks";
 import { InstallationGuide } from "./components/section/InstallationGuide";
 import { WhatGetsCreated } from "./components/section/WhatGetsCreated";
 import LoadingScreen from "./components/ui/LoadingScreen";
+import { LenisProvider } from "./components/LenisProvider";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -59,6 +60,7 @@ export default function Home() {
 
   return (
     <>
+    <LenisProvider/>
       <div className="min-h-screen w-full relative bg-gradient-to-br from-black via-black/90 to-gray-900/90 text-white">
         {/* Pearl Mist Background with Top Glow */}
         {/* <div
