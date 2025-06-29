@@ -13,6 +13,11 @@ A zero-config CLI tool that instantly adds a beautiful dark/light theme toggle t
 
 ## What is Next Theme Toggle?
 
+![UI Image](./public/image/img-one.png)
+![UI Image](./public/image/img-two.png)
+![UI Image](./public/image/img-three.png)
+
+
 **Next Theme Toggle** is a one-command solution to scaffold dark/light mode support into your existing Next.js + Tailwind project. It handles everything:
 
 - Installs `next-themes` and `lucide-react`
@@ -60,12 +65,6 @@ We welcome contributions from the community!
 Want to improve the UI toggle? Add support for other frameworks? Open a PR or start a discussion.
 
 - **[Contribute Guide](https://github.com/megh-bari/next-theme-toggle#contributing)**
-
----
-
-## Demo Screenshots
-
-> _(Add images here of the theme toggle in action if you have them!)_
 
 ---
 
