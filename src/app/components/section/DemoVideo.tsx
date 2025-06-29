@@ -4,13 +4,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Monitor, Play } from "lucide-react"
 import Player from "@vimeo/player"
+import Image from "next/image"
 
 export function DemoVideo() {
-    const iframeRef = useRef(null)
+    const iframeRef = useRef<HTMLIFrameElement>(null)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [showControls, setShowControls] = useState(false)
     const [error, setError] = useState("")
-    const playerRef = useRef(null)
+    const playerRef = useRef<Player | null>(null)
 
     useEffect(() => {
         if (!iframeRef.current) return
@@ -24,11 +24,10 @@ export function DemoVideo() {
         // Vimeo event listeners
         player.on("play", () => {
             setIsPlaying(true)
-            setShowControls(true)
             setError("")
         })
         player.on("pause", () => setIsPlaying(false))
-        player.on("error", (err) => {
+        player.on("error", (err: any) => {
             setError(`Video error: ${err.message || "Unknown error"}`)
         })
 
@@ -49,30 +48,13 @@ export function DemoVideo() {
                     setIsPlaying(true)
                 }
                 setError("")
-            } catch (err) {
+            } catch (err: any) {
                 setError(`Play failed: ${err.message}`)
             }
         }
     }
 
-    const handleVideoError = (e) => {
-        setError(`Video error: ${e?.message || 'Unknown error'}`)
-    }
-
-    const handleVideoLoad = () => {
-        setError("")
-    }
-
-    const handleVideoPlay = () => {
-        setIsPlaying(true)
-        setShowControls(true)
-    }
-
-    const handleVideoPause = () => {
-        setIsPlaying(false)
-    }
-
-    const handleVideoClick = (e) => {
+    const handleVideoClick = (e: React.MouseEvent) => {
         // Prevent custom play button from interfering with native controls
         if (!isPlaying) {
             e.preventDefault()
@@ -106,17 +88,17 @@ export function DemoVideo() {
                                     title="next-theme-toggle-demo - Made with Clipchamp"
                                     className="w-full h-full object-cover rounded-t-lg sm:rounded-t-xl"
                                     tabIndex={-1}
-                                    onLoad={handleVideoLoad}
                                     onClick={handleVideoClick}
                                 />
 
                                 {/* Blur and Pause Button Overlay when Paused */}
                                 {!isPlaying && (
                                     <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 rounded-t-lg sm:rounded-t-xl pointer-events-none">
-                                        <img
+                                        <Image
                                             src="/image/thumbnail.png"
                                             alt="Video thumbnail"
-                                            className="absolute inset-0 w-full h-full object-cover rounded-t-lg sm:rounded-t-xl pointer-events-auto"
+                                            fill
+                                            className="absolute inset-0 object-cover rounded-t-lg sm:rounded-t-xl pointer-events-auto"
                                             draggable={false}
                                         />
                                         <div className="absolute inset-0 bg-black/60 transition-all duration-300 rounded-t-lg sm:rounded-t-xl pointer-events-auto" />
@@ -129,7 +111,6 @@ export function DemoVideo() {
                                         </button>
                                     </div>
                                 )}
-
 
                                 {/* Error display for debugging */}
                                 {error && (
