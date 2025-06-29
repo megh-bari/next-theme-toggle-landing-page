@@ -4,14 +4,15 @@ import { Github, Package, SunMoon } from "lucide-react";
 
 export function Header() {
     const navItems = [
-        { href: "#features", label: "Features" },
-        { href: "#installation", label: "Installation" },
-        { href: "#how-it-works", label: "How it Works" },
+        { id: "features", label: "Features" },
+        { id: "installation", label: "Installation" },
+        { id: "how-it-works", label: "How it Works" },
     ];
+    
     const scrollToSection = (sectionId: string) => {
-        const element = document.getElementById(sectionId)
+        const element = document.getElementById(sectionId);
         if (element) {
-            element.scrollTo({ top: 0, behavior: "smooth" });
+            element.scrollIntoView({ behavior: "smooth" });
         }
     }
 
@@ -25,10 +26,7 @@ export function Header() {
                     }}
                 >
                     <SunMoon className="h-6 w-6 text-white  -mt-[2px]" />
-                    <span className="text-lg sm:text-xl ml-1 font-semibold text-white"
-
-                    >
-                        {/* Next Theme Toggle */}
+                    <span className="text-lg sm:text-xl ml-1 font-semibold text-white">
                         NextToggle
                     </span>
                 </div>
@@ -36,17 +34,15 @@ export function Header() {
                 {/* Center*/}
                 <nav className="hidden lg:flex items-center space-x-8 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     {navItems.map((item) => (
-                        <a
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => scrollToSection(item.label)}
-                            className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                        <button
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium bg-transparent border-none cursor-pointer"
                         >
                             {item.label}
-                        </a>
+                        </button>
                     ))}
                 </nav>
-
 
                 {/* Right */}
                 <div className="flex items-center space-x-2 sm:space-x-4 z-10">
@@ -74,7 +70,6 @@ export function Header() {
                             rel="noopener noreferrer"
                         >
                             <Package className="h-4 w-4 " />
-
                             <span className=" sm:inline">NPM Package</span>
                         </a>
                     </Button>
