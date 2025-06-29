@@ -126,7 +126,6 @@ html, body {
   padding: 0;
     background-color: var(--background);
 }
-
 html {
   scroll-behavior: auto !important;
   /* overflow-x: hidden; */
