@@ -19,13 +19,13 @@ export function Header() {
         <header className="sticky z-50 top-0 px-4 pt-5">
             <div className="z-50 w-full max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between backdrop-blur-xs bg-white/1 border border-white/10 rounded-2xl shadow-xl">
                 {/* Left */}
-                <div className="flex items-center space-x-2 z-10 cursor-pointer"
-                onClick={()=>{
-                     window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
+                <div className="flex items-center space-x-1 z-10 cursor-pointer"
+                    onClick={() => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                 >
-                    <SunMoon className="h-6 w-6 text-white" />
-                    <span className="text-lg sm:text-xl font-semibold text-white"
+                    <SunMoon className="h-6 w-6 text-white  -mt-[2px]" />
+                    <span className="text-lg sm:text-xl ml-1 font-semibold text-white"
 
                     >
                         {/* Next Theme Toggle */}

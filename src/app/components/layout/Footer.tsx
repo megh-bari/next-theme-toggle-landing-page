@@ -1,4 +1,4 @@
-import { Code2, Github } from "lucide-react";
+import { Github, SunMoon } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,12 +8,12 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-1 text-center md:text-left">
             <div className="flex items-center gap-2 mb-4">
-              <Code2 className="h-6 w-6 text-white" />
+              <SunMoon className="h-6 w-6 text-white" />
 
               <span className="text-xl font-bold text-white">NextToggle</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Instantly Insert Boilerplate Code
+              Toggle Themes in One Command
             </p>
           </div>
 
@@ -87,7 +87,7 @@ export default function Footer() {
             </a>
             <span>•</span>
             <a
-              href="https://github.com/megh-bari/boilerkit"
+              href="https://github.com/megh-bari/next-theme-toggle"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gray-400 text-white  flex items-center gap-1 font-semibold transition-colors"

@@ -121,6 +121,12 @@
   }
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+    background-color: var(--background);
+}
+
 html {
   scroll-behavior: auto !important;
   /* overflow-x: hidden; */
@@ -138,10 +144,6 @@ body {
 }
 
 .loading-background {
-  background-color: black;
-    transition: background 0.3s;
-}
-
-.font-mono {
-  font-family: var(--font-geist-mono), monospace;
+  background-color: black !important;
+    transition: background 0.5s;
 }

@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Theme Toggle — CLI for Next.js Projects
 
-## Getting Started
+[![npm version](https://badge.fury.io/js/next-theme-toggle.svg)](https://badge.fury.io/js/next-theme-toggle)
+[![Downloads](https://img.shields.io/npm/dm/next-theme-toggle.svg)](https://npmjs.com/package/next-theme-toggle)
 
-First, run the development server:
+A zero-config CLI tool that instantly adds a beautiful dark/light theme toggle to your Next.js project — with Tailwind CSS, `next-themes`, and pre-built components.
+
+> Because setting up theme support **shouldn't be a project of its own**.
+
+---
+
+- **[Live - Next Theme Toggle](https://next-theme-toggle.megh.me)**
+
+## What is Next Theme Toggle?
+
+**Next Theme Toggle** is a one-command solution to scaffold dark/light mode support into your existing Next.js + Tailwind project. It handles everything:
+
+- Installs `next-themes` and `lucide-react`
+- Adds a `ThemeProvider` with `next-themes`
+- Injects reusable toggle button components
+- Works with Tailwind CSS (auto-installs if needed)
+- Clean, minimal code with no extra fluff
+
+---
+
+## Usage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx next-theme-toggle
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+That’s it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You’ll get a beautiful, animated theme toggle that just works — no setup, no headaches.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- **One Command Setup**
+- **Lucide Icons for Toggle UI**
+- **Tailwind Styled Components**
+- **Handles Missing Tailwind or Old Versions**
+- **Injects Files in Clean Folder Structure**
+- **Tested with Multiple Next.js Versions**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Related Links
 
-## Deploy on Vercel
+- **[GitHub Repo](https://github.com/megh-bari/next-theme-toggle)**
+- **[NPM Package](https://www.npmjs.com/package/next-theme-toggle)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+We welcome contributions from the community!
+
+Want to improve the UI toggle? Add support for other frameworks? Open a PR or start a discussion.
+
+- **[Contribute Guide](https://github.com/megh-bari/next-theme-toggle#contributing)**
+
+---
+
+## Demo Screenshots
+
+> _(Add images here of the theme toggle in action if you have them!)_
+
+---
+
+## Why?
+
+Because dark mode shouldn't take hours to set up.
+
+---
+
+## Try it now
+
+```bash
+npx next-theme-toggle
+```
+
+> Get dark/light mode support in seconds.
