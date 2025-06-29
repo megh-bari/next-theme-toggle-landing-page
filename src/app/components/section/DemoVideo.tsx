@@ -11,6 +11,7 @@ export function DemoVideo() {
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const [vimeoInstance, setVimeoInstance] = useState<Player | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [hasStarted, setHasStarted] = useState(false); // Track if video has ever been played
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -20,7 +21,6 @@ export function DemoVideo() {
         const setupVimeo = async () => {
             try {
                 if (!iframeRef.current) return;
-
 
                 localInstance = new Player(iframeRef.current);
 
@@ -33,6 +33,7 @@ export function DemoVideo() {
                 localInstance.on("play", () => {
                     if (isMounted) {
                         setIsPlaying(true);
+                        setHasStarted(true); // Mark that video has been played
                         setError("");
                     }
                 });
@@ -51,7 +52,6 @@ export function DemoVideo() {
                     setError("Failed to initialize Vimeo player.");
                 }
             }
-
         };
 
         setupVimeo();
@@ -81,7 +81,6 @@ export function DemoVideo() {
         }
     };
 
-
     const handleOverlayClick = (e: React.MouseEvent) => {
         if (!isPlaying) {
             e.preventDefault();
@@ -107,7 +106,7 @@ export function DemoVideo() {
                             <div className="relative aspect-video group overflow-hidden">
                                 <iframe
                                     ref={iframeRef}
-                                    src="https://player.vimeo.com/video/1097279949?h=28c0db27de&badge=0&autopause=0&player_id=0&app_id=58479"
+                                    src="https://player.vimeo.com/video/1097279949?h=28c0db27de&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                                     allowFullScreen
@@ -117,7 +116,8 @@ export function DemoVideo() {
                                     onClick={handleOverlayClick}
                                 />
 
-                                {!isPlaying && (
+                                {/* Show thumbnail overlay if video hasn't started yet */}
+                                {!hasStarted && (
                                     <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 rounded-t-lg sm:rounded-t-xl pointer-events-none">
                                         <Image
                                             src="/image/thumbnail.png"
@@ -127,6 +127,19 @@ export function DemoVideo() {
                                             draggable={false}
                                         />
                                         <div className="absolute inset-0 bg-black/60 transition-all duration-300 rounded-t-lg sm:rounded-t-xl pointer-events-auto" />
+                                        <button
+                                            className="relative z-10 group/btn cursor-pointer bg-white/20 backdrop-blur-md border border-white/20 rounded-full p-3 sm:p-4 lg:p-6 hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl pointer-events-auto"
+                                            onClick={handleToggle}
+                                            aria-label="Play video"
+                                        >
+                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-white ml-0.5 sm:ml-1 group-hover/btn:scale-110 transition-transform duration-200" />
+                                        </button>
+                                    </div>
+                                )}
+
+                                {/* Show play button when video is paused (but has been started) */}
+                                {hasStarted && !isPlaying && (
+                                    <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 rounded-t-lg sm:rounded-t-xl pointer-events-none">
                                         <button
                                             className="relative z-10 group/btn cursor-pointer bg-white/20 backdrop-blur-md border border-white/20 rounded-full p-3 sm:p-4 lg:p-6 hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl pointer-events-auto"
                                             onClick={handleToggle}
