@@ -146,7 +146,7 @@ export function DemoVideo() {
                                             onClick={handleToggle}
                                             aria-label="Play video"
                                         >
-                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-md text-white ml-0.5 sm:ml-1 group-hover/btn:scale-110 transition-transform duration-200" />
+                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-white ml-0.5 sm:ml-1 group-hover/btn:scale-110 transition-transform duration-200" />
                                         </button>
                                     </div>
                                 )}
